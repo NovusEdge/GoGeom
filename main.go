@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	td "gogeom/TwoDimension"
+	"math"
 )
 
 func main() {
-	l := td.Line{1, 10.0, nil}
+	l := td.Line{1, 10.0, math.Inf(1)}
 	p1 := td.Point{1, 0}
 	p2 := td.Point{1, 1}
 
@@ -20,4 +21,10 @@ func main() {
 
 	fmt.Println(p3.LiesOn(&l))
 	fmt.Println(p2.FromOrigin())
+
+	p4 := td.Point{0, 1}
+	fmt.Println(td.MakeLine(&p1, &p4))
+
+	fmt.Println(td.TriangleArea(&p1, &p4, &td.Origin))
+
 }
