@@ -2,7 +2,6 @@ package gogeom
 
 import (
 	"math"
-	"reflect"
 )
 
 // Point defines a point on a 2-d cartesian plane
@@ -15,15 +14,15 @@ var Origin Point = Point{0, 0}
 
 //LiesOn reports if a point lies on a line
 func (p *Point) LiesOn(l *Line) bool {
-	in_x := reflect.ValueOf(l.Intercept_x)
-	in_y := reflect.ValueOf(l.Intercept_y)
+	in_x := l.Intercept_x
+	in_y := l.Intercept_y
 
-	if reflect.TypeOf(l.Intercept_y) == nil {
-		return p.X == in_x.Float()
-	} else if reflect.TypeOf(l.Intercept_x) == nil {
-		return p.X == in_y.Float()
+	if in_x == math.Inf(1) || in_x == math.Inf(-1) {
+		return p.X == in_x
+	} else if in_y == math.Inf(1) || in_y == math.Inf(-1) {
+		return p.Y == in_y
 	} else {
-		return p.Y == (l.Slope*p.X)+in_y.Float()
+		return p.Y == (l.Slope*p.X)+in_y
 	}
 }
 
@@ -35,4 +34,22 @@ func (p_1 *Point) Dist(p_2 *Point) float64 {
 // FromOrigin reports the distance of the point from the origin ( O = (0, 0) )
 func (p *Point) FromOrigin() float64 {
 	return p.Dist(&Origin)
+}
+
+//AreCollinear reports if 3 points are collinear
+func AreCollinear(p1 *Point, p2 *Point, p3 *Point) bool {
+	return (p1.X-p2.X)*(p2.Y-p3.Y) == (p1.Y-p2.Y)*(p2.Y-p3.Y)
+}
+
+//TriangleArea reports the area of the triangle formed by 3 points
+func TriangleArea(p1 *Point, p2 *Point, p3 *Point) float64 {
+	if AreCollinear(p1, p2, p3) {
+		return 0
+	}
+	a := p1.Dist(p2)
+	b := p2.Dist(p3)
+	c := p1.Dist(p3)
+	s := (a + b + c) / 2
+
+	return math.Sqrt(s * (s - a) * (s - b) * (s - c))
 }
