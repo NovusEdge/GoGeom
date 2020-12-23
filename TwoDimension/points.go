@@ -29,3 +29,5 @@ func (p *Point) LiesOn(l *Line) bool {
 func (p_1 *Point) Dist(p_2 *Point) float64 {
 	return math.Sqrt(math.Pow(p_1.X-p_2.X, 2) + math.Pow(p_1.Y-p_2.Y, 2))
 }
+
+//test
