@@ -24,6 +24,20 @@ func MakeLine(p_1 *Point, p_2 *Point) (l Line) {
 	}
 }
 
+//LiesOn reports if a point lies on a line
+func (p *Point) LiesOnLine(l *Line) bool {
+	in_x := l.Intercept_x
+	in_y := l.Intercept_y
+
+	if in_x == math.Inf(1) || in_x == math.Inf(-1) {
+		return p.X == in_x
+	} else if in_y == math.Inf(1) || in_y == math.Inf(-1) {
+		return p.Y == in_y
+	} else {
+		return p.Y == (l.Slope*p.X)+in_y
+	}
+}
+
 //IsPerp reports if a line is perpendicular to another
 func (l1 *Line) IsPerp(l2 *Line) bool {
 	return l1.Slope*l2.Slope == -1
@@ -79,4 +93,19 @@ func (l *Line) FromOrigin() float64 {
 //FromLine reports the perpendicular distance between 2 parallel lines
 func (l1 *Line) FromLine(l2 *Line) float64 {
 	return math.Abs((l1.Intercept_y - l2.Intercept_y) / math.Sqrt(l1.Slope*l1.Slope+1))
+}
+
+//IsTangent reports if a line is tangential to circle [c]
+func (l *Line) IsTangent(c *Circle) bool {
+	return math.Abs(Intercept_y) == math.Abs(c.Radius*math.Sqrt(1+l.Slope*l.Slope))
+}
+
+func (l1 *Line) Intersection(l2 *Line) Point {
+	x := (l1.Intercept_y - l2.Intercept_y) / (l1.Slope - l2.Slope)
+	y := l1.Slope*x + l1.Intercept_y
+
+	return Point{
+		X: x,
+		Y: y,
+	}
 }
