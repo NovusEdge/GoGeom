@@ -12,20 +12,6 @@ type Point struct {
 
 var Origin Point = Point{0, 0}
 
-//LiesOn reports if a point lies on a line
-func (p *Point) LiesOn(l *Line) bool {
-	in_x := l.Intercept_x
-	in_y := l.Intercept_y
-
-	if in_x == math.Inf(1) || in_x == math.Inf(-1) {
-		return p.X == in_x
-	} else if in_y == math.Inf(1) || in_y == math.Inf(-1) {
-		return p.Y == in_y
-	} else {
-		return p.Y == (l.Slope*p.X)+in_y
-	}
-}
-
 //Dist reports the distance of one point from another
 func (p_1 *Point) Dist(p_2 *Point) float64 {
 	return math.Sqrt(math.Pow(p_1.X-p_2.X, 2) + math.Pow(p_1.Y-p_2.Y, 2))
