@@ -49,3 +49,11 @@ func (p *Point) LiesOnParabola(pb *Parabola) bool {
 	f_Dist := p.Dist(&pb.Focus)
 	return f_Dist == d_Dist
 }
+
+func (l *Line) IntersectsParabola(pb *Parabola) (bool, Point, Point) {
+	A := pb.Axis()
+	if l.Slope == A.Slope && l.Intercept_x == A.Intercept_x && l.Intercept_y == A.Intercept_y {
+		return true, pb.Vertex(), nil
+	}
+
+}
