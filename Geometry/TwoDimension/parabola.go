@@ -1,12 +1,13 @@
 package gogeom
 
-//import (
-//	"math"
-//)
+import (
+	"math"
+)
 
+//Parabola defines a parabola on a 2D cartesian plane
 type Parabola struct {
-	Focus     Point
-	Directrix Line
+	Focus    Point
+	Diretrix Line
 }
 
 //Axis returns the axis of the parabola
@@ -50,10 +51,17 @@ func (p *Point) LiesOnParabola(pb *Parabola) bool {
 	return f_Dist == d_Dist
 }
 
+//IntersectsParabola reports the points where line intersects the parabola
 func (l *Line) IntersectsParabola(pb *Parabola) (bool, Point, Point) {
 	A := pb.Axis()
 	if l.Slope == A.Slope && l.Intercept_x == A.Intercept_x && l.Intercept_y == A.Intercept_y {
 		return true, pb.Vertex(), nil
 	}
 
+}
+
+//LatusRectum reports the length of the latus-rectum of the parabola
+func (pb *Parabola) LatusRectum() float64 {
+	v := pb.Vertex()
+	return 4 * pb.Focus.Dist(&v)
 }
