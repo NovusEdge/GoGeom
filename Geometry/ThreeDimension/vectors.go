@@ -1,8 +1,8 @@
 package gogeom
 
-import (
-	"math"
-)
+// import (
+// 	"math"
+// )
 
 type Vector struct {
 	Point_1 Point

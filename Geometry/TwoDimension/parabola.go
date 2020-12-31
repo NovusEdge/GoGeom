@@ -1,9 +1,5 @@
 package gogeom
 
-import (
-	"math"
-)
-
 //Parabola defines a parabola on a 2D cartesian plane
 type Parabola struct {
 	Focus    Point
@@ -52,13 +48,13 @@ func (p *Point) LiesOnParabola(pb *Parabola) bool {
 }
 
 //IntersectsParabola reports the points where line intersects the parabola
-func (l *Line) IntersectsParabola(pb *Parabola) (bool, Point, Point) {
-	A := pb.Axis()
-	if l.Slope == A.Slope && l.Intercept_x == A.Intercept_x && l.Intercept_y == A.Intercept_y {
-		return true, pb.Vertex(), nil
-	}
+// func (l *Line) IntersectsParabola(pb *Parabola) (bool, Point, Point) {
+// 	A := pb.Axis()
+// 	if l.Slope == A.Slope && l.Intercept_x == A.Intercept_x && l.Intercept_y == A.Intercept_y {
+// 		return true, pb.Vertex(), Point{math.Inf(1), math.Inf(1)}
+// 	}
 
-}
+// }
 
 //LatusRectum reports the length of the latus-rectum of the parabola
 func (pb *Parabola) LatusRectum() float64 {

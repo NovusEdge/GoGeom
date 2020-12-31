@@ -10,8 +10,8 @@ import (
 //	Point_2 Point
 //}
 
-const I Vector = Vector{Point_1: Origin, Point_2: Point{X: 1, Y: 0}}
-const J Vector = Vector{Point_1: Origin, Point_2: Point{X: 0, Y: 1}}
+var I Vector = Vector{Point_1: Origin, Point_2: Point{X: 1, Y: 0}}
+var J Vector = Vector{Point_1: Origin, Point_2: Point{X: 0, Y: 1}}
 
 //Vector defines a 2D vector in direction from [Point_1] to [Point_2]
 type Vector struct {
@@ -59,8 +59,8 @@ func (cv *CmpVector) Resize(resize_factor float64) CmpVector {
 func (v *Vector) UnitVector() Vector {
 	p1 := v.Point_1
 	p2 := Point{
-		X: v.Point_2.X / v.Magnitude,
-		Y: v.Point_2.Y / v.Magnitude,
+		X: v.Point_2.X / v.Magnitude(),
+		Y: v.Point_2.Y / v.Magnitude(),
 	}
 	return Vector{Point_1: p1, Point_2: p2}
 }
@@ -73,7 +73,7 @@ func (cv *CmpVector) UnitVector() CmpVector {
 }
 
 //DotProduct reports the dot product between 2 vectors
-func (v1 *Vector) DotProduct(v2 *CmpVector) float64 {
+func (v1 *Vector) DotProduct(v2 *Vector) float64 {
 	x_cmp1, y_cmp1 := v1.Point_2.X-v1.Point_1.X, v1.Point_2.Y-v1.Point_1.Y
 	x_cmp2, y_cmp2 := v2.Point_2.X-v2.Point_1.X, v2.Point_2.Y-v2.Point_1.Y
 	return x_cmp1*x_cmp2 + y_cmp1*y_cmp2

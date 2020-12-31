@@ -97,7 +97,7 @@ func (l1 *Line) FromLine(l2 *Line) float64 {
 
 //IsTangent reports if a line is tangential to circle [c]
 func (l *Line) IsTangent(c *Circle) bool {
-	return math.Abs(Intercept_y) == math.Abs(c.Radius*math.Sqrt(1+l.Slope*l.Slope))
+	return math.Abs(l.Intercept_y) == math.Abs(c.Radius*math.Sqrt(1+l.Slope*l.Slope))
 }
 
 func (l1 *Line) Intersection(l2 *Line) Point {
