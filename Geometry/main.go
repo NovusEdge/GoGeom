@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	ttd "gogeom/ThreeDimension"
 	td "gogeom/TwoDimension"
 	"math"
 )
@@ -30,4 +31,6 @@ func main() {
 
 	fmt.Println(td.TriangleArea(&p1, &p4, &td.Origin))
 
+	p_1 := ttd.Point{0, 0, 0}
+	fmt.Println(p_1)
 }
