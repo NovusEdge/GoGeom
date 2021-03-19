@@ -1,8 +1,8 @@
 package gogeom
 
-//import (
-//	"math"
-//)
+// import (
+// 	"math"
+// )
 
 type Parabola struct {
 	Focus     Point
@@ -13,7 +13,7 @@ type Parabola struct {
 func (pb *Parabola) Axis() Line {
 
 	F := pb.Focus
-	D := pb.Diretrix
+	D := pb.Directrix
 
 	in_y := D.Intercept_y - (F.X * (D.Slope*D.Slope + 1) / D.Slope)
 	in_x := D.Slope * in_y
@@ -28,7 +28,7 @@ func (pb *Parabola) Axis() Line {
 //Vertex returns the vertex of the parabola
 func (pb *Parabola) Vertex() Point {
 
-	D := pb.Diretrix
+	D := pb.Directrix
 	A := pb.Axis()
 
 	F := pb.Focus
@@ -45,15 +45,17 @@ func (pb *Parabola) Vertex() Point {
 
 //LiesOnParabola reports if a point lies on a parabola
 func (p *Point) LiesOnParabola(pb *Parabola) bool {
-	d_Dist := pb.Diretrix.FromPoint(p)
+	d_Dist := (pb.Directrix).FromPoint(p)
 	f_Dist := p.Dist(&pb.Focus)
 	return f_Dist == d_Dist
 }
 
-func (l *Line) IntersectsParabola(pb *Parabola) (bool, Point, Point) {
-	A := pb.Axis()
-	if l.Slope == A.Slope && l.Intercept_x == A.Intercept_x && l.Intercept_y == A.Intercept_y {
-		return true, pb.Vertex(), nil
-	}
-
-}
+// func (l *Line) IntersectsParabola(pb *Parabola) (bool, *Point, *Point) {
+// 	A := pb.Axis()
+//
+// 	if l.Slope == A.Slope && l.Intercept_x == A.Intercept_x && l.Intercept_y == A.Intercept_y {
+// 		v := pb.Vertex()
+// 		return true, &v, nil
+// 	}
+//
+// }
