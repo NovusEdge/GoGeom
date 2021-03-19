@@ -20,12 +20,14 @@ func (e *Ellipse) Center() Point {
 
 //LatusRectum reports the length of the latus-rectum of the parabola
 func (e *Ellipse) LatusRectum() float64 {
-	return 2 * e.Minor_Raduis * e.Minor_Radius / e.Major_Raduis
+
+	return 2 * e.Minor_Radius * e.Minor_Radius / e.Major_Radius
 }
 
 //Eccentricity reports the eccentricity of the ellipse
 func (e *Ellipse) Eccentricity() float64 {
-	return e.Centre().Dist(e.Focus_1) / e.Major_Radius
+	c := e.Center()
+	return c.Dist(&e.Focus_1) / e.Major_Radius
 }
 
 //IsLine reports if the ellipse is a special case where it's just a line
@@ -35,5 +37,5 @@ func (e *Ellipse) IsLine() bool {
 
 //IsCircle reports if the ellipse is a circle
 func (e *Ellipse) IsCircle() bool {
-	return e.Focus_1.IsEqual(e.Focus_2)
+	return e.Focus_1.IsEqual(&e.Focus_2)
 }

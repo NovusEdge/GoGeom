@@ -1,5 +1,69 @@
 package gogeom
 
+<<<<<<< HEAD
+import "math"
+
+//VectorFunctions ...
+type VectorFunctions interface {
+	Magnitude() float64
+	Add()
+	Angle()
+}
+
+//PositionVector ...
+/*
+	X is the coefficient of the x-component of the vector
+	Y is the coefficient of the y-component of the vector
+*/
+type PositionVector struct {
+	X float64
+	Y float64
+}
+
+//Vector ...
+/*
+	Tail is the start-point of the vector
+	Head is the end-point of the vector
+*/
+type Vector struct {
+	Tail PositionVector
+	Head PositionVector
+}
+
+/*
+O represents a 0 vector.
+
+I represents the unit vector along x-axis
+
+J represents the unti vector along y-axis
+*/
+const (
+	O PositionVector = Vector{0, 0}
+	I PositionVector = Vector{1, 0}
+	J PositionVector = Vector{0, 1}
+)
+
+//TODO: complete this...
+
+//Add returns the addition of 2 vectors
+func (pv *PositionVector) Add(opv *PositionVector) (res PositionVector) {
+	return
+}
+
+//Add returns the addition of 2 vectors
+func (v *Vector) Add(ov *Vector) (res Vector) {
+	return
+}
+
+//Magnitude reports the magnitude of the vector
+func (pv *PositionVector) Magnitude() float64 {
+	return math.Sqrt(pv.X*pv.X + pv.Y*pv.Y)
+}
+
+//Magnitude reports the magnitude of the vector
+func (v *Vector) Magnitude() float64 {
+	return
+=======
 import (
 	"math"
 )
@@ -10,8 +74,8 @@ import (
 //	Point_2 Point
 //}
 
-const I Vector = Vector{Point_1: Origin, Point_2: Point{X: 1, Y: 0}}
-const J Vector = Vector{Point_1: Origin, Point_2: Point{X: 0, Y: 1}}
+var I Vector = Vector{Point_1: Origin, Point_2: Point{X: 1, Y: 0}}
+var J Vector = Vector{Point_1: Origin, Point_2: Point{X: 0, Y: 1}}
 
 //Vector defines a 2D vector in direction from [Point_1] to [Point_2]
 type Vector struct {
@@ -59,8 +123,8 @@ func (cv *CmpVector) Resize(resize_factor float64) CmpVector {
 func (v *Vector) UnitVector() Vector {
 	p1 := v.Point_1
 	p2 := Point{
-		X: v.Point_2.X / v.Magnitude,
-		Y: v.Point_2.Y / v.Magnitude,
+		X: v.Point_2.X / v.Magnitude(),
+		Y: v.Point_2.Y / v.Magnitude(),
 	}
 	return Vector{Point_1: p1, Point_2: p2}
 }
@@ -73,7 +137,7 @@ func (cv *CmpVector) UnitVector() CmpVector {
 }
 
 //DotProduct reports the dot product between 2 vectors
-func (v1 *Vector) DotProduct(v2 *CmpVector) float64 {
+func (v1 *Vector) DotProduct(v2 *Vector) float64 {
 	x_cmp1, y_cmp1 := v1.Point_2.X-v1.Point_1.X, v1.Point_2.Y-v1.Point_1.Y
 	x_cmp2, y_cmp2 := v2.Point_2.X-v2.Point_1.X, v2.Point_2.Y-v2.Point_1.Y
 	return x_cmp1*x_cmp2 + y_cmp1*y_cmp2
@@ -90,4 +154,5 @@ func (v1 *Vector) Angle(v2 *Vector) float64 {
 
 func (cv1 *CmpVector) Angle(cv2 *CmpVector) float64 {
 	return math.Acos(cv1.DotProduct(cv2) / (cv1.Magnitude() * cv2.Magnitude()))
+>>>>>>> ee5a21ed00c40d3809a6b2d896c7db31eee4cb23
 }
